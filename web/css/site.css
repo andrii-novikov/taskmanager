@@ -136,3 +136,62 @@ a.desc:after {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.panel.panel-primary {
+    overflow: hidden;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.panel .panel-title i {
+    color: #212B3D;
+    font-size: 20px;
+    vertical-align: middle;
+    margin-right:10px;
+}
+
+.panel .panel-title {
+    align-items: center;
+    display: flex;
+    height: 34px;
+}
+
+.panel .panel-body {
+    padding-bottom:0;
+}
+
+.add-task {
+    margin-top:-15px;
+    padding: 5px;
+    background: #D6D6D6;
+}
+
+.add-task i {
+    color:green;
+    width: 35px;
+    text-align:center;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.add-task form {
+    display: inline-block;
+    width: 100%;
+}
+
+table.table {
+    margin-bottom:0px;
+}
+
+table.table tr td {
+    vertical-align: middle;
+}
+
+table.table tr td:first-child {
+    width:35px;
+    text-align: center;
+}
+
+table.table tr td:last-child {
+    width:10em;
+}
