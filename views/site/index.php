@@ -13,59 +13,36 @@ $this->title = 'Taskmanager';
         <h4>From ruby garge</h4>
     </div>
     <div class="container">
-        <? foreach ($lists as $list): ?>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-8 col-md-10">
-                            <div class="panel-title">
-                                <i class="glyphicon glyphicon-list-alt"></i>
-                                <span><?= $list->title?></span>
-                            </div>
-                        </div>
-                        <div class="col-xs-4 col-md-2">
-                            <div class="btn-group pull-right">
-                                <?= \yii\helpers\Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['/site/'], ['class'=>'btn btn-primary']) ?>
-                                <?= \yii\helpers\Html::a('<i class="glyphicon glyphicon-trash"></i> ', ['/site/'], ['class'=>'btn btn-primary']) ?>
-                            </div>
-                        </div>
+        <?php
+        foreach ($lists as $list) {
+            include "todolist_table.php";
+        }
+        ?>
+    </div>
+    <div class="container">
+        <div class="row text-center">
+            <?= yii\helpers\Html::button('Add TODO List',['class'=>'btn btn-primary','type'=>'btn','data-toggle'=>'modal','data-target'=>'#addlist-modal']); ?>
+        </div>
+    </div>
+    <div class="modal fade" id="addlist-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-title">
+                        Введите название списка
                     </div>
-                </div>
-                <div class="panel-body">
-                    <div class="row add-task">
-                        <form class="form-inline" role="form" method="post" action="index.php?r=site">
-                            <i class="glyphicon glyphicon-plus"></i>
+                    <div class="modal-body">
+                        <form role="form" class="form-horizontal" method="post" action="index.php?  r=site/addlist">
                             <div class="input-group">
-                                <input type="text" class="form-control">
-                                <span class="input-group-btn">
-                                    <?= \yii\helpers\Html::submitButton('Add Task',['class'=>'btn btn-success']) ?>
+                                <input class="form-control" name="name">
+                                    <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary">ОК</button>
                                 </span>
                             </div>
                         </form>
                     </div>
-                    <div class="row">
-                        <table class="table table-hover table-striped table-bordered">
-                            <? foreach ($list->tasks as $task): ?>
-                                <tr>
-                                    <td>
-                                        <?= yii\helpers\Html::checkbox('task',false,['value'=>$task->id])?>
-                                    </td>
-                                    <td>
-                                        <?= $task->title ?>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <?= yii\helpers\Html::a('',[],['class'=>'btn btn-default glyphicon glyphicon-sort']) ?>
-                                            <?= yii\helpers\Html::a('',[],['class'=>'btn btn-default glyphicon glyphicon-pencil']) ?>
-                                            <?= yii\helpers\Html::a('',[],['class'=>'btn btn-default glyphicon glyphicon-trash']) ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <? endforeach?>
-                        </table>
-                    </div>
                 </div>
-            </div>
-        <? endforeach?>
-    </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
