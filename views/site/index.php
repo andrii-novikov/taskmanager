@@ -33,4 +33,17 @@ $this->title = 'Taskmanager';
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <div class="modal" id="error">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        Error
+                    </div>
+                </div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
 </div>

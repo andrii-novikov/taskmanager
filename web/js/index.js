@@ -30,7 +30,7 @@ App = {
             },
             error: function (res) {
                 console.log(res);
-                $('.modal-body').html(res.responseText);
+                App.showMessage(res.responseText);
             }
         });
     },
@@ -47,10 +47,15 @@ App = {
                 },
                 error: function (res) {
                     console.log(res);
-                    $('.modal-body').html(res.responseText);
+                    App.showMessage(res.responseText);
                 }
             });
         }
+    },
+
+    showMessage: function (message) {
+        $('#error .modal-body').html(message);
+        $('#error').modal('show');
     }
 };
 
