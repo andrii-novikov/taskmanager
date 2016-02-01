@@ -25,7 +25,7 @@
                             ['todolists/delete','id'=>$list->id],
                             [
                                 'class'=>'btn btn-primary',
-                                'name'=>'deleteList'
+                                'name'=>'delete'
                             ]
                         ) ?>
                     </div>
@@ -34,20 +34,14 @@
         </div>
         <div class="panel-body">
             <div class="row add-task">
-                <form class="form-inline" role="form" method="post" action="index.php?r=site">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <?= \yii\helpers\Html::submitButton('Add Task',['class'=>'btn btn-success']) ?>
-                    </span>
-                    </div>
-                </form>
+                <? $model  = new \app\models\Task();
+                    echo $this->render("createtaskform.php", compact('list','model'));
+                ?>
             </div>
             <div class="row">
                 <table class="table table-hover table-striped table-bordered">
                     <?php
-                    foreach ($list->tasks as $task) {
+                    foreach ($list->getTasks()->orderBy('prioritize DESC')->all() as $task) {
                         include "task_row.php";
                     }
                     ?>

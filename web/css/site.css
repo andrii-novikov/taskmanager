@@ -166,11 +166,13 @@ a.desc:after {
     background: #D6D6D6;
 }
 
-.add-task i {
+.add-task .icon {
     color:green;
-    width: 35px;
+    padding: 0 0 0 15px;
+    color: green;
+    font-size: 22px;
+    width: 50px;
     text-align:center;
-    font-size: 20px;
     vertical-align: middle;
 }
 

@@ -1,9 +1,11 @@
 App = {
     init: function () {
         $(document).off('submit','#todolist-form');
+        $(document).off('submit','#task-form');
         $(document).on('submit', '#todolist-form', App.onSubmitTodolist);
+        $(document).on('submit', '#task-form', App.onSubmitTodolist);
 
-        $('[name=deleteList]').click(App.deleteList);
+        $('[name=delete]').click(App.deleteList);
         $('[data-toggle=modal]').click(App.loadModal);
     },
 

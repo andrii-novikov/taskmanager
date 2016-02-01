@@ -46,10 +46,10 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'prioritize' => 'Prioritize',
-            'dedline' => 'Dedline',
-            'done' => 'Done',
+            'title' => 'Название',
+            'prioritize' => 'Приоритет',
+            'dedline' => 'Дедлайн',
+            'done' => 'Завершено?',
             'list_id' => 'List ID',
         ];
     }
@@ -60,5 +60,10 @@ class Task extends \yii\db\ActiveRecord
     public function getList()
     {
         return $this->hasOne(Todolist::className(), ['id' => 'list_id']);
+    }
+
+    public static function getMaxPrioritize() {
+        $record = self::find()->orderBy('prioritize DESC') ->one();
+        return $record->prioritize;
     }
 }
