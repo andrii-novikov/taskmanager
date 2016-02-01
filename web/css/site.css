@@ -197,3 +197,8 @@ table.table tr td:first-child {
 table.table tr td:last-child {
     width:10em;
 }
+
+a.task-done, a.text-done:hover {
+    text-decoration: line-through;
+    color: #761c19;
+}

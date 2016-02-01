@@ -3,7 +3,15 @@
         <?= yii\helpers\Html::checkbox('task',false,['value'=>$task->id])?>
     </td>
     <td>
-        <?= $task->title ?>
+        <?= \yii\helpers\Html::a(
+            $task->title,
+            ['task/view', 'id'=>$task->id],
+            [
+                'class' => $task->done ?
+                    'task-done' :
+                    ''
+            ]
+        ); ?>
     </td>
     <td>
         <div class="btn-group">
