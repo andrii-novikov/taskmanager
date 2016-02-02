@@ -1,6 +1,8 @@
 <li class="list-group-item row task">
     <div class="col-xs-1 text-center">
-        <?= $task->prioritize?>
+        <span class="glyphicon
+        <?= $task->done ? "glyphicon-check" : "glyphicon-unchecked" ?>
+        "></span>
     </div>
     <div class="col-xs-6 col-sm-8 col-md-8">
         <?= \yii\helpers\Html::a(
@@ -16,8 +18,21 @@
         ); ?>
     </div>
     <div class="col-xs-5 col-sm-3 col-md-3 text-center">
-        <div class="btn-group">
-            <?= yii\helpers\Html::a('',[],['class'=>'btn btn-default glyphicon glyphicon-sort']) ?>
+        <div class="btn-group ">
+            <?= yii\helpers\Html::a(
+                '',
+                ['/task/increase-prioritize','id'=>$task->id],
+                [
+                    'name'=>'increasePrioritize',
+                    'class'=>'btn btn-half-l btn-default glyphicon glyphicon-arrow-up'
+                ]) ?>
+            <?= yii\helpers\Html::a(
+                '',
+                ['/task/decrease-prioritize','id'=>$task->id],
+                [
+                    'name'=>'increasePrioritize',
+                    'class'=>'btn btn-half-r btn-default glyphicon glyphicon-arrow-down'
+                ]) ?>
             <?= yii\helpers\Html::a(
                 '',
                 ['/task/update','id'=>$task->id],

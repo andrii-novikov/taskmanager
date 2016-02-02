@@ -88,6 +88,44 @@ class TaskController extends Controller
         return $this->getAjaxResponse();
     }
 
+    public function actionIncreasePrioritize($id)
+    {
+        $task = $this->findModel($id);
+
+        $importantTask = Task::find()
+            ->where(['>','prioritize',$task->prioritize])
+            ->orderBy('prioritize')
+            ->one();
+
+        if (!is_null($importantTask)) {
+            $this->changePrioritize($task,$importantTask);
+        }
+
+        return $this->getAjaxResponse();
+    }
+
+    public function actionDecreasePrioritize($id)
+    {
+        $task = $this->findModel($id);
+
+        $importantTask = Task::find()
+            ->where(['<','prioritize',$task->prioritize])
+            ->orderBy('prioritize DESC')
+            ->one();
+
+        if (!is_null($importantTask)) {
+            $this->changePrioritize($task,$importantTask);
+        }
+
+        return $this->getAjaxResponse();
+    }
+
+    protected function changePrioritize(&$task,&$task2) {
+        list($task->prioritize,$task2->prioritize) = array($task2->prioritize,$task->prioritize);
+        $task->save();
+        $task2->save();
+    }
+
     public function getAjaxResponse() {
         return $this->renderAjax('../site/todolists',['lists'=>Yii::$app->user->getIdentity()->todolists]);
     }

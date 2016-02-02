@@ -6,6 +6,7 @@ App = {
         $(document).on('submit', '#task-form', App.onSubmitTodolist);
 
         $('[name=delete]').click(App.deleteList);
+        $('[name=increasePrioritize]').click(App.increasePrioritize);
         $('[data-toggle=modal]').click(App.loadModal);
     },
 
@@ -14,6 +15,15 @@ App = {
         $.get($(this).attr('href')).then(function (resp) {
             $('.modal-content').html(resp);
         });
+    },
+
+    increasePrioritize: function (e) {
+        e.preventDefault();
+
+        $.post($(this).attr('href')).then(function (resp) {
+            $('.container-fluid.todolists').html(resp);
+            App.init();
+        })
     },
 
     onSubmitTodolist: function (e) {
