@@ -196,3 +196,7 @@ a.task-done, a.text-done:hover {
     text-decoration: line-through;
     color: #761c19;
 }
+
+[class*=title]:first-letter {
+    text-transform: capitalize;
+}

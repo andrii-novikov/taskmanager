@@ -7,6 +7,8 @@
             $task->title,
             ['task/view', 'id'=>$task->id],
             [
+                'data-toggle'=>'modal',
+                'data-target'=>'#modal',
                 'class' => $task->done ?
                     'task-done' :
                     ''

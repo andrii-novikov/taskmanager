@@ -26,7 +26,7 @@ App = {
             type: "POST",
             data: form.serialize(),
             success: function (result) {
-                $('.container.todolists').html(result);
+                $('.container-fluid.todolists').html(result);
                 $('#modal').modal('hide');
                 App.init();
             },
@@ -44,7 +44,7 @@ App = {
                 url: $(this).attr('href'),
                 type: "POST",
                 success: function (result) {
-                    $('.container.todolists').html(result);
+                    $('.container-fluid.todolists').html(result);
                     App.init();
                 },
                 error: function (res) {

@@ -12,29 +12,32 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="task-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h1 class="modal-title"><?= Html::encode($this->title) ?></h1>
+    </div>
+    <div class="modal-body">
+        <?= DetailView::widget([
+            'model' => $model,
+            'formatter' => [
+                'class' => 'yii\i18n\Formatter',
+                'nullDisplay' => '<span class="not-set">Не установлен</span>',
+                'booleanFormat' => ['Нет','Да'],
+                'dateFormat' => 'dd.MM.yyyy'
+            ],
+            'attributes' => [
+                'id',
+                'title',
+                'prioritize',
+                'dedline:date',
+                'done:boolean',
+                [
+                    'label'=>'Список',
+                    'value'=>$model->list->title
+                ]
             ],
         ]) ?>
-    </p>
+    </div>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'prioritize',
-            'dedline',
-            'done',
-            'list_id',
-        ],
-    ]) ?>
 
 </div>
