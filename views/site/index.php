@@ -8,14 +8,14 @@ $this->title = 'Taskmanager';
     <div class="container-fluid">
         <?= \yii\helpers\Html::a('Logout (' . $user->identity->username . ')', ['/site/logout'], ['class'=>'btn btn-primary pull-right', 'data-method' => 'post']) ?>
     </div>
-    <div class="container text-center text-uppercase">
+    <div class="container-fluid text-center text-uppercase">
         <h2>Simple TODO Lists</h2>
         <h4>From ruby garge</h4>
     </div>
-    <div class="container todolists">
+    <div class="container-fluid todolists">
         <?php include "todolists.php"; ?>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row text-center">
             <?= yii\helpers\Html::a('Add TODO List',
                 ['/todolists/create']

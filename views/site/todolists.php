@@ -39,13 +39,13 @@
                 ?>
             </div>
             <div class="row">
-                <table class="table table-hover table-striped table-bordered">
+                <ul class="list-unstyled list-group">
                     <?php
                     foreach ($list->getTasks()->orderBy('prioritize DESC')->all() as $task) {
                         include "task_row.php";
                     }
                     ?>
-                </table>
+                </ul>
             </div>
         </div>
     </div>

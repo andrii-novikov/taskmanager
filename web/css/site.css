@@ -96,6 +96,11 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
+.site-index {
+    max-width: 50em;
+    margin: 0px auto;
+}
+
 .site-index h2 {
     font-weight:bold;
 }
@@ -181,21 +186,10 @@ a.desc:after {
     width: 100%;
 }
 
-table.table {
-    margin-bottom:0px;
-}
-
-table.table tr td {
+.task.row > div[class*=col-]{
     vertical-align: middle;
-}
-
-table.table tr td:first-child {
-    width:35px;
-    text-align: center;
-}
-
-table.table tr td:last-child {
-    width:10em;
+    line-height: 34px;
+    padding:0;
 }
 
 a.task-done, a.text-done:hover {
