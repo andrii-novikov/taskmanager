@@ -1,6 +1,13 @@
 html,
 body {
     height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d3d1c1+0,c2c6b7+35,d7b62b+64,b9610c+100 */
     background: #d3d1c1; /* Old browsers */
     background: -moz-linear-gradient(top,  #d3d1c1 0%, #c2c6b7 35%, #d7b62b 64%, #b9610c 100%); /* FF3.6-15 */
@@ -10,15 +17,8 @@ body {
     background-repeat: repeat;
 }
 
-.wrap {
-    min-height: 100%;
-    height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
-}
-
 .wrap > .container {
-    padding: 70px 15px 20px;
+    padding: 20px 15px 20px;
 }
 
 .footer {
@@ -180,6 +180,7 @@ a.desc:after {
     width: 50px;
     text-align:center;
     vertical-align: middle;
+    line-height:34px;
 }
 
 .add-task form {

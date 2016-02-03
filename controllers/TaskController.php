@@ -49,10 +49,6 @@ class TaskController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->getAjaxResponse();
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
     }
 

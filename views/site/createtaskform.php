@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'list_id')->hiddenInput(['value'=>$list->id])->label(false) ?>
 
             <div class="input-group-btn">
-                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'OK', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
             </div>
         </div>
     </div>
