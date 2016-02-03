@@ -91,6 +91,6 @@ class TodolistsController extends Controller
     }
 
     protected function getAjaxResponse() {
-        return $this->renderAjax('..\site\todolists', ['lists' => Yii::$app->user->getIdentity()->todolists]);
+        return $this->renderAjax('../site/todolists', ['lists' => Yii::$app->user->getIdentity()->todolists]);
     }
 }
