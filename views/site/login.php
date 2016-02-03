@@ -63,6 +63,7 @@ $this->title = 'Taskmanager';
 
                 <?= $form->field($register, 'username')->textInput(['placeholder'=>'Username']) ?>
                 <?= $form->field($register, 'password')->passwordInput(['placeholder'=>'Password']) ?>
+                <?= $form->field($register, 'password_repeat')->passwordInput(['placeholder'=>'Repeat password']) ?>
 
                 <div class="form-group col-lg-offset-1 col-lg-10">
                     <?= Html::submitButton('Sign Up', ['class' => 'btn btn-success btn-block']) ?>

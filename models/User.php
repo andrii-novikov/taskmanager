@@ -17,6 +17,7 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    public $password_repeat;
     /**
      * @inheritdoc
      */
@@ -31,10 +32,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password'], 'required'],
+            [['username', 'password','password_repeat'], 'required'],
             [['username'], 'string', 'max' => 225],
             [['password', 'authKey', 'accessToken'], 'string', 'max' => 255],
-            [['username'], 'unique']
+            [['username'], 'unique'],
+            ['password_repeat','compare','compareAttribute'=>'password','message'=>'Passwords doesn\'t equal' ]
         ];
     }
 
