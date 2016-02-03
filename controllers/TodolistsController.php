@@ -38,13 +38,9 @@ class TodolistsController extends Controller
         $model = new Todolist();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return Yii::$app->request->isAjax ?
-                $this->getAjaxResponse():
-                $this->redirect(['view', 'id' => $model->id]);
+            return $this->getAjaxResponse();
         } else {
-            return Yii::$app->request->isAjax ?
-                $this->renderAjax('create', ['model' => $model]):
-                $this->render('create', ['model' => $model]);
+            return $this->renderAjax('create', ['model' => $model]);
         }
     }
 
@@ -59,13 +55,9 @@ class TodolistsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return Yii::$app->request->isAjax ?
-                $this->getAjaxResponse():
-                $this->redirect(['view', 'id' => $model->id]);
+            return $this->getAjaxResponse();
         } else {
-            return Yii::$app->request->isAjax ?
-                $this->renderAjax('update',['model'=>$model]):
-                $this->render('update', ['model' => $model,]);
+            return $this->renderAjax('update',['model'=>$model]);
         }
     }
 
@@ -99,6 +91,6 @@ class TodolistsController extends Controller
     }
 
     protected function getAjaxResponse() {
-        return $this->renderAjax('..\site\todolists', ['lists' => Yii::$app->user->identity->todolists]);
+        return $this->renderAjax('..\site\todolists', ['lists' => Yii::$app->user->getIdentity()->todolists]);
     }
 }
