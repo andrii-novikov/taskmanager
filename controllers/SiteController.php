@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\RegisterForm;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -59,13 +61,28 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $registerError=false;
+
+        $login = new LoginForm();
+        $register = new User();
+
+        if ($login->load(Yii::$app->request->post()) && $login->login()) {
             return $this->goBack();
         }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+
+        if ($this->isNeedRegister()) {
+            if ($register->load(Yii::$app->request->post()) && $register->save()) {
+                $message = "Register Success";
+            } else {
+                $registerError = true;
+            }
+        }
+
+        return $this->render('login', compact('login','register','message','registerError'));
+    }
+
+    protected function isNeedRegister() {
+        return !empty(Yii::$app->request->post('User'));
     }
 
     public function actionLogout()

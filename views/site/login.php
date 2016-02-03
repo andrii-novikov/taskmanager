@@ -11,33 +11,65 @@ $this->title = 'Taskmanager';
 
 ?>
 <div class="site-login">
-    <div class="container">
+    <h2 class="form-signin-heading text-center"><?= Html::encode($this->title) ?></h2>
+    <div class="row text-center">
+        <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+            <? if (!empty($message)):?><div class="alert alert-success"><?=$message?></div><? endif?>
+            <ul class="nav nav-tabs sign-tabs">
+                <li <?= !$registerError ? 'class="active"' : '' ?> ><a data-toggle="tab" href="#signin">Sign In</a></li>
+                <li <?= $registerError ? 'class="active"' : '' ?> ><a data-toggle="tab" href="#signup">Sign Up</a> </li>
+            </ul>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane fade <?= !$registerError ? 'in active"' : '' ?> " id="signin">
+            <?php $form = ActiveForm::begin([
+                'id' => 'login-form',
+                'options' => ['class' => 'form-signin'],
+                'fieldConfig' => [
+                    'template' => "{input}\n{error}"
+                ],
+            ]); ?>
 
-        <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
-            'options' => ['class' => 'form-signin'],
-            'fieldConfig' => [
-                'template' => "{input}\n{error}"
-//                'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-//                'labelOptions' => ['class' => 'col-lg-1 control-label'],
-            ],
-        ]); ?>
-            <h2 class="form-signin-heading text-center"><?= Html::encode($this->title) ?></h2>
+            <?= $form->field($login, 'username') -> textInput(['placeholder' => "Username",])?>
 
-            <?= $form->field($model, 'username') -> textInput(['placeholder' => "Username",])?>
+            <?= $form->field($login, 'password')->passwordInput(['placeholder'=>'Password']) ?>
 
-            <?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Password']) ?>
-
-            <?= $form->field($model, 'rememberMe')->checkbox([
-//                'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-3\">{error}</div>",
-            ]) ?>
+            <div class="form-group text-center">
+                <?= Html::activeCheckbox($login,'rememberMe') ?>
+            </div>
 
             <div class="form-group">
-                <div class="col-lg-offset-1 col-lg-11">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <div class="col-lg-offset-1 col-lg-10">
+                    <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
                 </div>
             </div>
 
-        <?php ActiveForm::end(); ?>
+            <?php ActiveForm::end(); ?>
+        </div>
+        <div class="tab-pane fade <?= $registerError ? 'in active"' : '' ?> " id="signup">
+            <div class="site-signup">
+
+                <?php $form = ActiveForm::begin(
+                    [
+                        'id' => 'login-form',
+//                        'action'=>['site/signup'],
+                        'options' => ['class' => 'form-signin'],
+                        'fieldConfig' => [
+                            'template' => "{input}\n{error}"
+                        ],
+                    ]
+                ); ?>
+
+                <?= $form->field($register, 'username')->textInput(['placeholder'=>'Username']) ?>
+                <?= $form->field($register, 'password')->passwordInput(['placeholder'=>'Password']) ?>
+
+                <div class="form-group col-lg-offset-1 col-lg-10">
+                    <?= Html::submitButton('Sign Up', ['class' => 'btn btn-success btn-block']) ?>
+                </div>
+                <?php ActiveForm::end(); ?>
+
+            </div><!-- site-signup -->
+        </div>
     </div>
 </div>

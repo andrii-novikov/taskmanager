@@ -7,6 +7,7 @@ body {
     background: -webkit-linear-gradient(top,  #d3d1c1 0%,#c2c6b7 35%,#d7b62b 64%,#b9610c 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom,  #d3d1c1 0%,#c2c6b7 35%,#d7b62b 64%,#b9610c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d3d1c1', endColorstr='#b9610c',GradientType=0 ); /* IE6-9 */
+    background-repeat: repeat;
 }
 
 .wrap {
@@ -210,4 +211,8 @@ a.task-done, a.text-done:hover {
     padding-right: 0px;
     padding-left: 5px;
     border-right: none;
+}
+
+.sign-tabs {
+    display: inline-block;
 }
