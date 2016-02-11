@@ -88,14 +88,9 @@ class TaskController extends Controller
     {
         $task = $this->findModel($id);
 
-        $importantTask = Task::find()
-            ->where(['>','prioritize',$task->prioritize])
-            ->orderBy('prioritize')
-            ->one();
+        $index = $task->prioritizeIndex;
 
-        if (!is_null($importantTask)) {
-            $this->changePrioritize($task,$importantTask);
-        }
+        $this->changePrioritize($task,++$index);
 
         return $this->getAjaxResponse();
     }
@@ -104,22 +99,16 @@ class TaskController extends Controller
     {
         $task = $this->findModel($id);
 
-        $importantTask = Task::find()
-            ->where(['<','prioritize',$task->prioritize])
-            ->orderBy('prioritize DESC')
-            ->one();
+        $index = $task->prioritizeIndex;
 
-        if (!is_null($importantTask)) {
-            $this->changePrioritize($task,$importantTask);
-        }
+        $this->changePrioritize($task, --$index);
 
         return $this->getAjaxResponse();
     }
 
-    protected function changePrioritize(&$task,&$task2) {
-        list($task->prioritize,$task2->prioritize) = array($task2->prioritize,$task->prioritize);
-        $task->save();
-        $task2->save();
+    protected function changePrioritize(&$task,$prioritize) {
+        $task -> prioritize = $prioritize;
+        $task ->save();
     }
 
     public function getAjaxResponse() {

@@ -9,7 +9,8 @@ use Yii;
  *
  * @property integer $id
  * @property string $title
- * @property integer $prioritize
+ * @property string $prioritize
+ * @property array $prioritizes
  * @property string $dedline
  * @property integer $done
  * @property integer $list_id
@@ -33,7 +34,7 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'prioritize'], 'required'],
-            [['prioritize', 'done', 'list_id'], 'integer'],
+            [['done', 'list_id'], 'integer'],
             [['dedline'], 'safe'],
             [['title'], 'string', 'max' => 255]
         ];
@@ -62,8 +63,18 @@ class Task extends \yii\db\ActiveRecord
         return $this->hasOne(Todolist::className(), ['id' => 'list_id']);
     }
 
-    public static function getMaxPrioritize() {
-        $record = self::find()->orderBy('prioritize DESC') ->one();
-        return $record->prioritize;
+    public static function getPrioritizes() {
+        return [
+            'Низкий'=>'Низкий',
+            'Средний'=>'Средний',
+            'Высокий'=>'Высокий',
+            'Очень высокий'=>'Очень высокий'
+        ];
     }
+
+    public function getPrioritizeIndex() {
+        $index = array_search($this->prioritize, array_values(static::getPrioritizes()));
+        return ++$index;
+    }
+
 }

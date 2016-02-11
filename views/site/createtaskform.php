@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
         <div class="input-group">
             <?= Html::activeTextInput($model,'title',['class'=>'form-control']) ?>
 
-            <?= $form->field($model, 'prioritize')->hiddenInput(['value'=>$model->getMaxPrioritize()+1])->label(false) ?>
+            <?= $form->field($model, 'prioritize')->hiddenInput(['value'=>1])->label(false) ?>
 
             <?= $form->field($model, 'list_id')->hiddenInput(['value'=>$list->id])->label(false) ?>
 

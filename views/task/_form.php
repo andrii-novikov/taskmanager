@@ -15,13 +15,7 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'prioritize')->textInput([
-        'type'=>'number',
-        'min'=>'1',
-        'max'=>'9999',
-
-    ]) ?>
+    <?= $form->field($model, 'prioritize')->dropDownList($model->prioritizes) ?>
 
     <?= $form->field($model, 'dedline')->textInput([
         'type'=>'date'
