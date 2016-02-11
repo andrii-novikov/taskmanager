@@ -194,6 +194,24 @@ a.desc:after {
     padding:0;
 }
 
+.task.row .params {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+}
+
+.task.row .prioritize {
+    font-size: 0.8em;
+    line-height: 1em;
+    color: #0094dc;
+    vertical-align: sub;
+}
+.task.row .dedline {
+    font-size: 0.8em;
+    line-height: 1em;
+    color: #c82b28;
+}
+
 a.task-done, a.text-done:hover {
     text-decoration: line-through;
     color: #761c19;

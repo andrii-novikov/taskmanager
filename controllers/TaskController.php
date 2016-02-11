@@ -107,6 +107,8 @@ class TaskController extends Controller
     }
 
     protected function changePrioritize(&$task,$prioritize) {
+        if ($prioritize < 1) { $prioritize = 1; }
+        if ($prioritize > 4) { $prioritize = 4; }
         $task -> prioritize = $prioritize;
         $task ->save();
     }

@@ -16,6 +16,14 @@
                     ''
             ]
         ); ?>
+        <div class="params">
+            <?=\yii\helpers\Html::tag('span',$task->prioritize . ' приоритет',['class'=>'prioritize'])?>
+            <? if ($task->dedline){
+                echo \yii\helpers\Html::tag('span','Закончить до: '.$task->dedline,['class'=>'dedline']);
+            }
+            ?>
+        </div>
+
     </div>
     <div class="col-xs-5 col-sm-3 col-md-3 text-center">
         <div class="btn-group ">
