@@ -1,101 +1,90 @@
-Yii 2 Basic Project Template
-============================
+[Go to WEB version](http://druid.esy.es)
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
+Given tables:
+===============
+★ tasks (id, name, status, project_id)
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+★ projects (id, name)
 
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-basic/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-basic/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
+Write the queries for:
+-----------------------
 
-DIRECTORY STRUCTURE
--------------------
+1. get all statuses, not repeating, alphabetically ordered
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+    ```sql
+    SELECT DISTINCT status
+    FROM task
+    ORDER BY status ASC;
+    ```
 
+2. get the count of all tasks in each project, order by tasks count descending
 
+    ```sql
+    SELECT DISTINCT project_id, count(id) AS projecsCount
+    FROM task
+    GROUP BY project_id
+    ORDER BY projecsCount DESC;
+    ```
 
-REQUIREMENTS
-------------
+3. get the count of all tasks in each project, order by projects names
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+    ```sql
+    SELECT project.name, count(task.id)
+    FROM project
+    LEFT JOIN task ON project_id = project.id
+    GROUP BY project_id
+    ORDER BY project.name;
+    ```
 
+4. get the tasks for all projects having the name beginning with “N” letter
 
-INSTALLATION
-------------
+    ```sql
+    SELECT *
+    FROM task
+    WHERE name LIKE 'N%';
+    ```
 
-### Install from an Archive File
+5. get the list of all projects containing the ‘a’ letter in the middle of the name, and
+show the tasks count near each project. Mention that there can exist projects without
+tasks and tasks with project_id=NULL
 
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
+    ```sql
+    SELECT project.name, count(task.id)
+    FROM project LEFT JOIN task ON task.project_id = project.id
+    WHERE project.name LIKE '%a%'
+    GROUP BY project_id;
+    ```
 
-Set cookie validation key in `config/web.php` file to some random secret string:
+6. get the list of tasks with duplicate names. Order alphabetically
 
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
+    ```sql
+    SELECT name
+    FROM task
+    GROUP BY name
+    HAVING count(name)>1
+    ORDER BY name ASC;
+    ```
 
-You can then access the application through the following URL:
+7. get the list of tasks having several exact matches of both name and status, from
+the project ‘Garage’. Order by matches count
 
-~~~
-http://localhost/basic/web/
-~~~
+    ```sql
+    SELECT name, count(name) AS mathces
+    FROM task
+    WHERE task.project_id = (SELECT project.id FROM project WHERE project.name LIKE 'Garage')
+    GROUP BY task.name, task.status
+    HAVING count(*) > 1
+    ORDER BY mathces ASC;
+    ```
 
+8. get the list of project names having more than 10 tasks in status ‘completed’. Order
+by project_id
 
-### Install via Composer
-
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install this project template using the following command:
-
-~~~
-php composer.phar global require "fxp/composer-asset-plugin:~1.0.0"
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
-
-
-CONFIGURATION
--------------
-
-### Database
-
-Edit the file `config/db.php` with real data, for example:
-
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
-    'charset' => 'utf8',
-];
-```
-
-**NOTE:** Yii won't create the database for you, this has to be done manually before you can access it.
-
-Also check and edit the other files in the `config/` directory to customize your application.
+    ```sql
+    SELECT project.id, project.name, count(project_id) AS countoftasks
+    FROM project
+    LEFT JOIN task ON task.project_id = project.id
+      WHERE task.status = 'completed'
+    GROUP BY project_id
+    HAVING countoftasks > 10
+    ```
